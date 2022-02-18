@@ -10,12 +10,14 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:detect-theme.helloWorld"
+        "onCommand:detect-theme.run",
+		"onStartupFinished",
+		"*","onLanguage:java"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"commands": [{
-            "command": "detect-theme.helloWorld",
+            "command": "detect-theme.run",
             "title": "Detect Theme"
 
 		}]
