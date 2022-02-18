@@ -15,11 +15,15 @@ const activate = (context) => {
     'detect-theme.helloWorld',
     () => {
       let stdout;
-      if (os.platform() === 'darwin') {
-        stdout = execSync('defaults read -g AppleInterfaceStyle');
-        if (stdout.toString().trim() === 'Dark') {
-          vscode.window.showInformationMessage('Detected Theme: Dark');
-        } else {
+      try {
+        if (os.platform() === 'darwin') {
+          stdout = execSync('defaults read -g AppleInterfaceStyle');
+          if (stdout.toString().trim() === 'Dark') {
+            vscode.window.showInformationMessage('Detected Theme: Dark');
+          }
+        }
+      } catch (error) {
+        if (/does not exist/.test(error.stderr)) {
           vscode.window.showInformationMessage('Detected Theme: Light');
         }
       }
@@ -28,7 +32,7 @@ const activate = (context) => {
   context.subscriptions.push(disposable);
 };
 // this method is called when your extension is deactivated
-const deactivate = () => {};
+const deactivate = () => { };
 
 module.exports = {
   activate,
